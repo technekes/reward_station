@@ -80,6 +80,18 @@ module RewardStation
           'userId' => user_id
       })[:point_summary_collection][:point_summary]
     end
+    
+    def return_user attrs = {}
+        organization_id = attrs[:organization_id] || @organization_id
+        user_name = attrs[:user_name] || ""
+        
+        request_with_token(:return_user_by_user_name , :body => {
+          'ReturnUserByUserName' => {
+            'UserName' => user_name,
+            'OrganizationID' => organization_id
+          }
+        })[:return_user_by_user_name]
+    end
 
     def update_user user_id, attrs = {}
 
